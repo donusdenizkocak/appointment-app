@@ -2,6 +2,19 @@ import { Col, Container, Row } from "react-bootstrap"
 import {FaTimesCircle} from "react-icons/fa"
 
  const AppointmentList = ({appointments,setAppointments}) => {
+
+  const handleDelete = (id) =>{
+    setAppointments(appointments.filter((item)=> item.id !== id ))
+  }
+
+const handleDoubleClick =(id)=>{
+  setAppointments(
+    appointments.map((item)=>
+    item.id ==id ? {...item, consulted: !item.consulted} :item
+    )
+  )
+}
+
   return (
     <Container className="p-2">
     <h3 className="display-6 text-danger" >
@@ -10,7 +23,11 @@ import {FaTimesCircle} from "react-icons/fa"
     {appointments.map((item)=>{
         const {id,patient,consulted,doctor,day}=item;
         return(
-            <div className="appointments" key={id}>
+            <div 
+            className={consulted ? "appointments consulted" : "appointments"}
+            key={id}
+            onDoubleClick={()=>handleDoubleClick(id)}
+            >
             <Row className="justify-content-center g-3 align-item-center">
               <Col xs={12} sm={12} md={6}>
               <h4 className="text-danger">
@@ -32,6 +49,7 @@ import {FaTimesCircle} from "react-icons/fa"
                 <FaTimesCircle
                 className="text-danger fs-3"
                 type="button"
+                onClick={()=>handleDelete(id)}
                 />
               </Col>
             </Row>

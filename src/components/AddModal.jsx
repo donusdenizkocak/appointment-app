@@ -20,10 +20,10 @@ const AddModal=({show,appointments,setAppointments,handleClose,handleShow,select
       doctor:selectedDr
     }
     ])
-    console.log("object")
+    //console.log("object")
     handleClose()
   }
-  console.log(patientName,date)
+  //console.log(patientName,date)
 
   return (
     <>
